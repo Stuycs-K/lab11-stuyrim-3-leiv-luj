@@ -18,10 +18,8 @@ Make a clear list of features that work/dont work
 
 ## Adventurer Subclasses
 
-replace this with your documentation for your two Adventurer subclasses. If you modify or replace the provided CodeWarrior class, please provide documentation for that as well.
-
-| Adventurer | Regular Attack | Description | Ultimate Ability | Description| Support | Description | Special Resource |
+| Adventurer | Regular Attack | Description | Ultimate Ability | Description | Support | Description | Special Resource |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Butcher    | :------------: | :----------:     | :--------------: | :--------: | :-----: | :---------: | :--------------: |
-| Chef       | serveRawMeat() | -3HP to opponent by serving raw chicken | sprayChiliSauce() | -8HP to opponent by spraying chili sauce | cookYummyFood() | +5 HP to team by cooking delicious heartwarming food | seasoning |
-| Dishwasher | throwDish()    | -5HP to opponent by throwing dirty dishes | throwSoap() | -10HP to opponent by throwing a bacteria infested soap sponge | cleanKnives() | +3 HP to team by cleaning knives  | soap |
+| Butcher    | carve()        | -5HP to opponent by slicing with a butcher knife | meatCleaver() | -9HP to opponent by attacking with a meat cleaver | meatFeast() | +2 damage done by team by eating a meat feast | Meat Scraps |
+| Chef       | serveRawMeat() | -3HP to opponent by serving raw chicken | sprayChiliSauce() | -8HP to opponent by spraying chili sauce | cookYummyFood() | +5 HP to team by cooking delicious heartwarming food | Seasoning |
+| Dishwasher | throwDish()    | -5HP to opponent by throwing dirty dishes | throwSoap() | -10HP to opponent by throwing a bacteria infested soap sponge | cleanKnives() | +3 HP to team by cleaning knives  | Soap |
