@@ -18,8 +18,8 @@ Make a clear list of features that work/dont work
 
 ## Adventurer Subclasses
 
-| Adventurer | Regular Attack | Description | Ultimate Ability | Description | Support | Description | Special Resource |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Butcher    | carve()        | -5HP to opponent by slicing with a butcher knife | meatCleaver() | -9HP to opponent by attacking with a meat cleaver | meatFeast() | +2 damage done by team by eating a meat feast | Meat Scraps |
-| Chef       | serveRawMeat() | -3HP to opponent by serving raw chicken | sprayChiliSauce() | -8HP to opponent by spraying chili sauce | cookYummyFood() | +5 HP to team by cooking delicious heartwarming food | Seasoning |
-| Dishwasher | throwDish()    | -5HP to opponent by throwing dirty dishes | throwSoap() | -10HP to opponent by throwing a bacteria infested soap sponge | cleanKnives() | +3 HP to team by cleaning knives  | Soap |
+| Adventurer | Health | Regular Attack | Description | Ultimate Ability | Description | Support | Description | Special Resource |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Butcher    | 20 - 25 | carve()        | -5HP to opponent by slicing with a butcher knife | meatCleaver() | -9HP to opponent by attacking with a meat cleaver | meatFeast() | +2 damage done by team by eating a meat feast | Meat Scraps |
+| Chef       | 30 - 35 | serveRawMeat() | -3HP to opponent by serving raw chicken | sprayChiliSauce() | -8HP to opponent by spraying chili sauce | cookYummyFood() | +5 HP to team by cooking delicious heartwarming food | Seasoning |
+| Dishwasher | 25 - 30 | throwDish()    | -5HP to opponent by throwing dirty dishes | throwSoap() | -10HP to opponent by throwing a bacteria infested soap sponge | cleanKnives() | +3 HP to team by cleaning knives  | Soap |
