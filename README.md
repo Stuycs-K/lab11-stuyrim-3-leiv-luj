@@ -20,6 +20,6 @@ Make a clear list of features that work/dont work
 
 | Adventurer | Health | Regular Attack | Description | Ultimate Ability | Description | Support | Description | Special Resource |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Butcher    | 20 - 25 | carve()        | -5HP to opponent by slicing with a butcher knife | meatCleaver() | -9HP to opponent by attacking with a meat cleaver | meatFeast() | +3 damage done by team by eating a meat feast | Meat Scraps |
-| Chef       | 30 - 35 | serveRawMeat() | -2HP to opponent by serving raw chicken | sprayChiliSauce() | -5HP to opponent by spraying chili sauce | cookYummyFood() | +6 HP to team by cooking delicious heartwarming food | Seasoning |
-| Dishwasher | 25 - 30 | throwDish()    | -4HP to opponent by throwing dirty dishes | throwSoap() | -7HP to opponent by throwing a bacteria infested soap sponge | cleanKnives() | +3 HP to team by cleaning knives  | Soap |
+| Butcher    | 20 - 25 | carve()        | -5HP to opponent by slicing with a butcher knife | meatCleaver() | -9HP to opponent by attacking with a meat cleaver and -3HP to himself | meatFeast() | +3 damage done by team by eating a meat feast | Meat Scraps |
+| Chef       | 30 - 35 | serveRawMeat() | -1HP to opponent by serving raw chicken and making them go to sleep (skips one of their turns) | sprayChiliSauce() | -5HP to opponent by spraying chili sauce | cookYummyFood() | +6 HP to team by cooking delicious heartwarming food | Seasoning |
+| Dishwasher | 25 - 30 | throwDish()    | -4HP to opponent by throwing dirty dishes | throwSoap() | -7HP to opponent by throwing a bacteria infested soap sponge | cleanKnives() | -3 damage taken by team by cleaning knives  | Soap |
