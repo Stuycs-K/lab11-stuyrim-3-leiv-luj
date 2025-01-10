@@ -1,46 +1,46 @@
-public class CodeWarrior extends Adventurer{
-  int caffeine, caffeineMax;
+public class Dishwasher extends Adventurer{
+  int soap, soapMax;
   String preferredLanguage;
 
   /*the other constructors ultimately call the constructor
   *with all parameters.*/
-  public CodeWarrior(String name, int hp, String language){
+  public Dishwasher(String name, int hp, String language){
     super(name,hp);
-    caffeineMax = 12;
-    caffeine = caffeineMax/2;
+    soapMax = 12;
+    soap = soapMax/2;
     preferredLanguage = language;
   }
 
-  public CodeWarrior(String name, int hp){
+  public Dishwasher(String name, int hp){
     this(name,hp,"c++");
   }
 
-  public CodeWarrior(String name){
+  public Dishwasher(String name){
     this(name,24);
   }
 
-  public CodeWarrior(){
+  public Dishwasher(){
     this("Carmack");
   }
 
   /*The next 8 methods are all required because they are abstract:*/
   public String getSpecialName(){
-    return "caffeine";
+    return "soap";
   }
 
   public int getSpecial(){
-    return caffeine;
+    return soap;
   }
 
   public void setSpecial(int n){
-    caffeine = n;
+    soap = n;
   }
 
   public int getSpecialMax(){
-    return caffeineMax;
+    return soapMax;
   }
 
-  /*Deal 2-7 damage to opponent, restores 2 caffeine*/
+  /*Deal 2-7 damage to opponent, restores 2 soap*/
   public String attack(Adventurer other){
     int damage = (int)(Math.random()*6)+2;
     other.applyDamage(damage);
@@ -49,8 +49,8 @@ public class CodeWarrior extends Adventurer{
     " points of damage. They then take a sip of their coffee.";
   }
 
-  /*Deal 3-12 damage to opponent, only if caffeine is high enough.
-  *Reduces caffeine by 8.
+  /*Deal 3-12 damage to opponent, only if soap is high enough.
+  *Reduces soap by 8.
   */
   public String specialAttack(Adventurer other){
     if(getSpecial() >= 8){
@@ -61,7 +61,7 @@ public class CodeWarrior extends Adventurer{
       " skills to hack the matrix. "+
       " This glitched out "+other+" dealing "+ damage +" points of damage.";
     }else{
-      return "Not enough caffeine to use the ultimate code. Instead "+attack(other);
+      return "Not enough soap to use the ultimate code. Instead "+attack(other);
     }
 
   }
