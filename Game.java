@@ -22,8 +22,7 @@ public class Game{
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
     }
-    for (int i = 0; i < HEIGH
-      T; i++) {
+    for (int i = 0; i < HEIGHT;i++){
       Text.go(i, 0);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
