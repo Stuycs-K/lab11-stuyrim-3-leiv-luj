@@ -6,31 +6,32 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    run();
+    drawBackground();
   }
 
   //Display the borders of your screen that will not change.
   //Do not write over the blank areas where text will appear or parties will appear.
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+    Text.clear();
     for(int i = 0; i<WIDTH+1; i++){
       Text.go(0,i);
-      Text.colorize("", Text.BOLD, Text.WHITE, Text.BLUE);
-      System.out.println("");
-    }
-    for (int i = 0; i<HEIGHT; i++){
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.println(".");
       Text.go(29, i);
-      Text.colorize("", Text.BRIGHT, Text.GREEN, Text.CYAN);
-      System.out.print(" ");
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.print(".");
     }
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < HEIGH
+      T; i++) {
       Text.go(i, 0);
-      Text.colorize("", Text.BRIGHT, Text.MAGENTA, Text.YELLOW);
-      System.out.print(" ");
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.print(".");
       Text.go(i, 79);
-      Text.colorize("", Text.BRIGHT, Text.MAGENTA, Text.GREEN);
-      System.out.print(" ");
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.print(".");
   }
+    Text.reset();
     Text.showCursor();
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
