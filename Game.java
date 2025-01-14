@@ -30,8 +30,17 @@ public class Game{
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
   }
+  for (int i = 0; i < WIDTH+1;i++){
+    Text.go(i, 0);
+    Text.colorize(" ", BORDER_BACKGROUND);
+    System.out.print(".");
+    Text.go(7, i);
+    Text.colorize(" ", BORDER_BACKGROUND);
+    System.out.print(".");
+}
+  System.out.println(" ");
   Text.reset();
-  Text.go(28,3);
+  Text.go(32,3);
   Text.showCursor();
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
