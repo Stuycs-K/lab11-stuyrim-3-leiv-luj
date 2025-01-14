@@ -18,20 +18,21 @@ public class Game{
       Text.go(0,i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.println(".");
-      Text.go(29, i);
+      Text.go(30, i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
     }
-    for (int i = 0; i < HEIGHT;i++){
+    for (int i = 0; i < HEIGHT+1;i++){
       Text.go(i, 0);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
-      Text.go(i, 79);
+      Text.go(i, 80);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
   }
-    Text.reset();
-    Text.showCursor();
+  Text.reset();
+  Text.go(28,3);
+  Text.showCursor();
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
