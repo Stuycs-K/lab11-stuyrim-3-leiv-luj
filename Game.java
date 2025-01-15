@@ -14,33 +14,38 @@ public class Game{
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     Text.clear();
-    for(int i = 0; i<WIDTH+1; i++){
+    for(int i = 0; i<WIDTH+1; i++){ //horizontal line
       Text.go(0,i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.println(".");
       Text.go(30, i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
+      Text.go(7, i);
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.print(".");
+      Text.go(21, i);
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.print(".");
+      Text.go(27, i);
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.print(".");
     }
-    for (int i = 0; i < HEIGHT+1;i++){
+    for (int i = 0; i < HEIGHT+1;i++){ //vertical lines
       Text.go(i, 0);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
       Text.go(i, 80);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
-  }
-  for (int i = 0; i < WIDTH+1;i++){
-    Text.go(i, 0);
-    Text.colorize(" ", BORDER_BACKGROUND);
-    System.out.print(".");
-    Text.go(7, i);
-    Text.colorize(" ", BORDER_BACKGROUND);
-    System.out.print(".");
-}
-  System.out.println(" ");
+    }
+    for (int i = 7; i < 21;i++){ //vertical lines
+      Text.go(i, 45);
+      Text.colorize(" ", BORDER_BACKGROUND);
+      System.out.print(".");
+    }
   Text.reset();
-  Text.go(32,3);
+  Text.go(32,0);
   Text.showCursor();
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
