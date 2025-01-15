@@ -6,7 +6,9 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    drawBackground();
+    drawScreen();
+    Scanner in = new Scanner(System.in);
+    userInput(in);
   }
 
   //Display the borders of your screen that will not change.
@@ -131,13 +133,14 @@ public class Game{
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
-
+      Text.go(28,3);
       //show cursor
-
+      Text.showCursor();
+      System.out.println("What?");
       String input = in.nextLine();
+      Text.go(29,3);
 
       //clear the text that was written
-
       return input;
   }
 
