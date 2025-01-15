@@ -44,9 +44,9 @@ public class Chef extends Adventurer{
   public String attack(Adventurer other){
     int damage = (int)(Math.random()*3)+1;
     other.applyDamage(damage);
-    //restoreSpecial(2);
-    return this + " attacked "+ other + " and dealt "+ damage +
-    " points of damage. They then take a sip of their coffee.";
+    restoreSpecial(2);
+    return this + " served raw chicken to "+ other + " and dealt "+ damage +
+    " points of damage. It gives them food poisoning, making them fall asleep. " + this + " replenishes 2 seasoning.";
   }
 
   /*Deal 5-6 damage to opponent, only if seasoning is high enough.
@@ -65,16 +65,18 @@ public class Chef extends Adventurer{
     }
 
   }
-  /*Restores 5 special to other*/
+  /*Restores 6 hp to other*/
   public String support(Adventurer other){
-    return "Gives a coffee to "+other+" and restores "
+    int hp = 6;
+    setHP(getHP()+hp);
+    return "Cooked delicious food for " +other+" and restores "
     + other.restoreSpecial(5)+" "+other.getSpecialName();
   }
-  /*Restores 6 special and 1 hp to self.*/
+  /*Restores 6 hp to self.*/
   public String support(){
-    int hp = 1;
+    int hp = 6;
     setHP(getHP()+hp);
-    return this+" drinks a coffee to restores "+restoreSpecial(6)+" "
+    return this+" ate delicious food and gained "+restoreSpecial(6)+" "
     + getSpecialName()+ " and "+hp+" HP";
   }
 }

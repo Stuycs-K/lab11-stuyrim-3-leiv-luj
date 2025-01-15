@@ -44,8 +44,9 @@ public class Butcher extends Adventurer{
   public String attack(Adventurer other){
     int damage = (int)(Math.random()*3)+4;
     other.applyDamage(damage);
-    return this + " attacked "+ other + " and dealt "+ damage +
-    " points of damage.";
+    restoreSpecial(2);
+    return this + " sliced "+ other + " with a butcher knife and dealt "+ damage +
+    " points of damage. Replenished 2 meat scraps.";
   }
 
   /*Deal 9-12 damage to opponent if meatScraps is high enough (6).
@@ -64,16 +65,13 @@ public class Butcher extends Adventurer{
     }
 
   }
-  /*Restores 5 special to other*/
+  /*makes team do +3 damage*/
   public String support(Adventurer other){
-    return "Gives a coffee to "+other+" and restores "
-    + other.restoreSpecial(5)+" "+other.getSpecialName();
+    return "Served up a meat feast for "+other+". " + other + "'s attacks now do +3 more damage."
   }
-  /*Restores 6 special and 1 hp to self.*/
+  /*makes self do +3 damage*/
   public String support(){
-    int hp = 1;
-    setHP(getHP()+hp);
-    return this+" drinks a coffee to restores "+restoreSpecial(6)+" "
+    return this+" dines on a steak and "+restoreSpecial(6)+" "
     + getSpecialName()+ " and "+hp+" HP";
   }
 }

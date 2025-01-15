@@ -45,8 +45,8 @@ public class Dishwasher extends Adventurer{
     int damage = (int)(Math.random()*6)+2;
     other.applyDamage(damage);
     restoreSpecial(2);
-    return this + " attacked "+ other + " and dealt "+ damage +
-    " points of damage. They then take a sip of their coffee.";
+    return this + " threw dirty dishes at "+ other + " and dealt "+ damage +
+    " points of damage. " + this + "replenishes 2 soap.";
   }
 
   /*Deal 3-12 damage to opponent, only if soap is high enough.
@@ -65,16 +65,16 @@ public class Dishwasher extends Adventurer{
     }
 
   }
-  /*Restores 5 special to other*/
+  /* minus 3 damage taken by teammates */
   public String support(Adventurer other){
-    return "Gives a coffee to "+other+" and restores "
+    return "Cleans weapons of "+other+" and restores "
     + other.restoreSpecial(5)+" "+other.getSpecialName();
   }
-  /*Restores 6 special and 1 hp to self.*/
+  /* minus 3 damage taken by self */
   public String support(){
     int hp = 1;
     setHP(getHP()+hp);
-    return this+" drinks a coffee to restores "+restoreSpecial(6)+" "
+    return this+" cleans knives "+restoreSpecial(6)+" "
     + getSpecialName()+ " and "+hp+" HP";
   }
 }
