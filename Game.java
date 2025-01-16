@@ -75,6 +75,9 @@ public class Game{
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     drawText(text, row, col);
+    if(text.length>width){
+      Text.go(row+1, col);
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
