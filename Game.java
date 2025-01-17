@@ -74,9 +74,10 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    drawText(text, row, col);
-    if(text.length>width){
-      Text.go(row+1, col);
+    int currentRow = row;
+    for (int i = 0; i < text.length() && row < row + height; currentRow++) {
+      drawText(text.substring(i, Math.min(i+width, text.length())), currentRow, col);
+      i += width;
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
@@ -87,6 +88,12 @@ public class Game{
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static Adventurer createRandomAdventurer(){
+      if (((int)Math.random() * 3) == 1) {
+        return new Chef("Jeff");
+      }
+      else if (((int)Math.random() * 3) == 2) {
+        return new Dishwasher("Bill");
+      }
       return new Butcher("Bob"+(int)(Math.random()*100));
     }
 
@@ -102,7 +109,9 @@ public class Game{
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-      //YOUR CODE HERE
+      for (int i = 0; i < party.size(); i++) {
+        drawText(party.get(i), startRow, startCol);
+      }
       /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     }
 
