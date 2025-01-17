@@ -67,11 +67,12 @@ public class Butcher extends Adventurer{
   }
   /*makes team do +3 damage*/
   public String support(Adventurer other){
-    return "Served up a meat feast for "+other+". " + other + "'s attacks now do +3 more damage."
+    return "Served up a meat feast for "+other+". " + other + "'s attacks now do +3 more damage.";
   }
   /*makes self do +3 damage*/
   public String support(){
-    return this+" dines on a steak and "+restoreSpecial(6)+" "
-    + getSpecialName()+ " and "+hp+" HP";
+    return "";
+  //  return this+" dines on a steak and "+restoreSpecial(6)+" "
+  //  + getSpecialName()+ " and "+hp+" HP";
   }
 }
