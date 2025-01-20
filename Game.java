@@ -9,6 +9,7 @@ public class Game{
     drawScreen();
     Scanner in = new Scanner(System.in);
     userInput(in);
+    drawText("Hello", 3, 3);
   }
 
   //Display the borders of your screen that will not change.
@@ -38,11 +39,6 @@ public class Game{
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
       Text.go(i, 80);
-      Text.colorize(" ", BORDER_BACKGROUND);
-      System.out.print(".");
-    }
-    for (int i = 7; i < 21;i++){ //vertical lines
-      Text.go(i, 45);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
     }
@@ -109,8 +105,18 @@ public class Game{
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+      if (party.isEmpty()){
+        drawText("No Adventurers in party", startRow, 1);
+        return;
+      }
       for (int i = 0; i < party.size(); i++) {
-        drawText(party.get(i), startRow, startCol);
+        Adventurer adventurer = party.get(i);
+        String name = adventurer.getName();
+        String hp = "HP: " + adventurer.getHP();
+        String special = "Special" + adventurer.getSpecial();
+        drawText(name, startRow, 1);
+        drawText(hp, startRow+1, 1);
+        drawText(special, startRow+2, 1);
       }
       /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     }
@@ -182,6 +188,7 @@ public class Game{
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
+  
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     boolean partyTurn = true;
