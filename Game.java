@@ -7,9 +7,11 @@ public class Game{
 
   public static void main(String[] args) {
     ArrayList<Adventurer> party = new ArrayList<>();
-    party.add(new Butcher("Jeff", 10));
-    party.add(new Chef("Bill", 10));
-    party.add(new Dishwasher("Bob", 10));
+    int randnumberAdventurers = 2 + (int)(Math.random() * 2);
+    for (int i = 0; i < randnumberAdventurers; i++){
+      party.add(createRandomAdventurer());
+    }
+    
 
     ArrayList<Adventurer> enemies = new ArrayList<>();
     enemies.add(new Butcher("Evil", 10));
@@ -212,9 +214,13 @@ public class Game{
     ArrayList<Adventurer> enemies = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
-    enemies.add(new Butcher("Evil", 10));
-    enemies.add(new Butcher("Harm", 10));
-    enemies.add(new Butcher("Meow", 10));
+    int randnumberEnemies = 1 + (int)(Math.random() * 2);
+    if(randnumberEnemies == 1){
+      enemies.add(new Butcher("Boss", 10));
+    }
+    for (int i = 0; i < randnumberEnemies;i++){
+      enemies.add(createRandomAdventurer());
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     //Adventurers you control:
@@ -222,9 +228,10 @@ public class Game{
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
-    party.add(new Butcher("Jeff", 10));
-    party.add(new Chef("Bill", 10));
-    party.add(new Dishwasher("Bob", 10));
+    int randnumberAdventurers = 2 + (int)(Math.random() * 2);
+    for (int i = 0; i < randnumberAdventurers; i++){
+      party.add(createRandomAdventurer());
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     boolean partyTurn = true;
