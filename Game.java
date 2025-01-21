@@ -16,9 +16,9 @@ public class Game{
     enemies.add(new Butcher("Harm", 10));
     enemies.add(new Butcher("Meow", 10));
     drawScreen(party,enemies);
-    //Scanner in = new Scanner(System.in);
-    //userInput(in);
     Text.go(28,31);
+    Scanner in = new Scanner(System.in);
+    userInput(in);
   }
 
   //Display the borders of your screen that will not change.
@@ -146,9 +146,19 @@ public class Game{
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
     //COLORIZE THE OUTPUT IF HIGH/LOW:
+    double percent = (double) hp / maxHP * 100;
     // under 25% : red
+    if(percent < 25){
+      output = Text.colorize(output, Text.RED);
+    }
     // under 75% : yellow
+    else if(percent < 75){
+      output = Text.colorize(output, Text.YELLOW);
+    }
     // otherwise : white
+    else{
+      output = Text.colorize(output, Text.WHITE);
+    }
     return output;
   }
 
@@ -175,7 +185,7 @@ public class Game{
       Text.go(28,3);
       //show cursor
       Text.showCursor();
-      System.out.println("What?");
+      System.out.println("");
       String input = in.nextLine();
       Text.go(29,3);
 
