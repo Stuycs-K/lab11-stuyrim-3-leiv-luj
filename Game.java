@@ -6,7 +6,16 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    drawScreen();
+    ArrayList<Adventurer> party = new ArrayList<>();
+    party.add(new Butcher("Jeff", 10));
+    party.add(new Chef("Bill", 10));
+    party.add(new Dishwasher("Bob", 10));
+
+    ArrayList<Adventurer> enemies = new ArrayList<>();
+    enemies.add(new Butcher("Evil", 10));
+    enemies.add(new Butcher("Harm", 10));
+    enemies.add(new Butcher("Meow", 10));
+    drawScreen(party,enemies);
     Scanner in = new Scanner(System.in);
     userInput(in);
     drawText("Hello", 3, 3);
@@ -21,15 +30,19 @@ public class Game{
       Text.go(0,i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.println(".");
+
       Text.go(30, i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
+      
       Text.go(7, i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
+
       Text.go(21, i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
+
       Text.go(27, i);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
@@ -38,6 +51,7 @@ public class Game{
       Text.go(i, 0);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
+      
       Text.go(i, 80);
       Text.colorize(" ", BORDER_BACKGROUND);
       System.out.print(".");
@@ -84,13 +98,14 @@ public class Game{
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static Adventurer createRandomAdventurer(){
-      if (((int)Math.random() * 3) == 1) {
+      int random = (int)(Math.random()*3);
+      if (random == 0) {
         return new Chef("Jeff");
       }
-      else if (((int)Math.random() * 3) == 2) {
+      else if (random == 1) {
         return new Dishwasher("Bill");
       }
-      return new Butcher("Bob"+(int)(Math.random()*100));
+      return new Butcher("Bob" + (int)(Math.random()*100));
     }
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
@@ -114,6 +129,7 @@ public class Game{
         String name = adventurer.getName();
         String hp = "HP: " + adventurer.getHP();
         String special = "Special" + adventurer.getSpecial();
+        
         drawText(name, startRow, 1);
         drawText(hp, startRow+1, 1);
         drawText(special, startRow+2, 1);
@@ -139,13 +155,14 @@ public class Game{
   //Display the party and enemies
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
-  public static void drawScreen(){
+  public static void drawScreen(ArrayList<Adventurer> party, ArrayList<Adventurer> enemies){
 
     drawBackground();
 
     //draw player party
-
+    drawParty(party, 1);
     //draw enemy party
+    drawParty(enemies,10);
 
   }
 
@@ -178,9 +195,12 @@ public class Game{
     //Make an ArrayList of Adventurers and add 1-3 enemies to it.
     //If only 1 enemy is added it should be the boss class.
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
-    ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
+    ArrayList<Adventurer> enemies = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
+    enemies.add(new Butcher("Evil", 10));
+    enemies.add(new Butcher("Harm", 10));
+    enemies.add(new Butcher("Meow", 10));
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     //Adventurers you control:
@@ -188,7 +208,9 @@ public class Game{
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
-  
+    party.add(new Butcher("Jeff", 10));
+    party.add(new Chef("Bill", 10));
+    party.add(new Dishwasher("Bob", 10));
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     boolean partyTurn = true;
@@ -200,7 +222,7 @@ public class Game{
     //Draw the window border
 
     //You can add parameters to draw screen!
-    drawScreen();//initial state.
+    drawScreen(party,enemies);//initial state.
 
     //Main loop
 
@@ -286,7 +308,7 @@ public class Game{
       }
 
       //display the updated screen after input has been processed.
-      drawScreen();
+      drawScreen(party,enemies);
 
 
     }//end of main game loop
