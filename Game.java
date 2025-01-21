@@ -16,9 +16,9 @@ public class Game{
     enemies.add(new Butcher("Harm", 10));
     enemies.add(new Butcher("Meow", 10));
     drawScreen(party,enemies);
-    Scanner in = new Scanner(System.in);
-    userInput(in);
-    drawText("Hello", 3, 3);
+    //Scanner in = new Scanner(System.in);
+    //userInput(in);
+    Text.go(28,31);
   }
 
   //Display the borders of your screen that will not change.
@@ -124,16 +124,20 @@ public class Game{
         drawText("No Adventurers in party", startRow, 1);
         return;
       }
+      int startCol = 10;
+      int startColEnemies = startCol + 40;
       for (int i = 0; i < party.size(); i++) {
         Adventurer adventurer = party.get(i);
         String name = adventurer.getName();
         String hp = "HP: " + adventurer.getHP();
-        String special = "Special" + adventurer.getSpecial();
+        String special = "Special: " + adventurer.getSpecial();
         
-        drawText(name, startRow, 1);
-        drawText(hp, startRow+1, 1);
-        drawText(special, startRow+2, 1);
+        int colset = i*26;
+        drawText(name, startRow, startCol + colset);
+        drawText(hp, startRow+1, startCol + colset);
+        drawText(special, startRow+2, startCol + colset);
       }
+      
       /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     }
 
@@ -160,9 +164,9 @@ public class Game{
     drawBackground();
 
     //draw player party
-    drawParty(party, 1);
+    drawParty(party, 3);
     //draw enemy party
-    drawParty(enemies,10);
+    drawParty(enemies,23);
 
   }
 
