@@ -6,21 +6,7 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    ArrayList<Adventurer> party = new ArrayList<>();
-    int randnumberAdventurers = 2 + (int)(Math.random() * 2);
-    for (int i = 0; i < randnumberAdventurers; i++){
-      party.add(createRandomAdventurer());
-    }
-    
-
-    ArrayList<Adventurer> enemies = new ArrayList<>();
-    enemies.add(new Butcher("Evil", 10));
-    enemies.add(new Butcher("Harm", 10));
-    enemies.add(new Butcher("Meow", 10));
-    drawScreen(party,enemies);
-    Text.go(28,31);
-    Scanner in = new Scanner(System.in);
-    userInput(in);
+    run();
   }
 
   //Display the borders of your screen that will not change.
@@ -59,7 +45,6 @@ public class Game{
       System.out.print(".");
     }
   Text.reset();
-  Text.go(32,0);
   Text.showCursor();
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
@@ -70,7 +55,7 @@ public class Game{
   public static void drawText(String s,int startRow, int startCol){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     Text.go(startRow, startCol);
-    System.out.println(s);
+    System.out.print(s);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -102,12 +87,12 @@ public class Game{
     public static Adventurer createRandomAdventurer(){
       int random = (int)(Math.random()*3);
       if (random == 0) {
-        return new Chef("Jeff");
+        return new Chef("Chef");
       }
       else if (random == 1) {
-        return new Dishwasher("Bill");
+        return new Dishwasher("Dishwasher");
       }
-      return new Butcher("Bob" + (int)(Math.random()*100));
+      return new Butcher("Butcher" + (int)(Math.random()*100));
     }
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
@@ -165,21 +150,17 @@ public class Game{
   }
 
 
-
-
-
   //Display the party and enemies
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
   public static void drawScreen(ArrayList<Adventurer> party, ArrayList<Adventurer> enemies){
 
     drawBackground();
-
     //draw player party
     drawParty(party, 3);
     //draw enemy party
     drawParty(enemies,23);
-
+    Text.go(29,3);
   }
 
   public static String userInput(Scanner in){
@@ -187,8 +168,10 @@ public class Game{
       Text.go(28,3);
       //show cursor
       Text.showCursor();
-      System.out.println("");
+      System.out.print("> ");
       String input = in.nextLine();
+      Text.go(29,3);
+      System.out.print(" ".repeat(75));
       Text.go(29,3);
 
       //clear the text that was written
@@ -249,6 +232,8 @@ public class Game{
 
     //display this prompt at the start of the game.
     String preprompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+    drawText(preprompt,28,5);
+    Text.go(29,3);
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
@@ -273,7 +258,7 @@ public class Game{
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
           //"support 0" or "su 0" or "su 2" etc.
-          //assume the value that follows su  is an integer.
+          //assume the value that follows su is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -288,13 +273,15 @@ public class Game{
           //This is a player turn.
           //Decide where to draw the following prompt:
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-
+          drawText(prompt, 28,5);
+          Text.go(29,3);
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
           String prompt = "press enter to see monster's turn";
-
+          drawText(prompt, 28,5);
+          Text.go(29,3);
           partyTurn = false;
           whichOpponent = 0;
         }
@@ -326,6 +313,8 @@ public class Game{
         partyTurn=true;
         //display this prompt before player's turn
         String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+        drawText(prompt, 28,5);
+        Text.go(29,5);
       }
 
       //display the updated screen after input has been processed.
