@@ -95,12 +95,12 @@ public class Game{
     public static Adventurer createRandomAdventurer(){
       int random = (int)(Math.random()*3);
       if (random == 0) {
-        return new Chef("Chef", 20 + (int)(Math.random() * 6), "English");
+        return new Chef("Chef", 20 + (int)(Math.random() * 6));
       }
       else if (random == 1) {
-        return new Dishwasher("Dishwasher", 30 + (int)(Math.random() * 6), "English");
+        return new Dishwasher("Dishwasher", 30 + (int)(Math.random() * 6));
       }
-      return new Butcher("Butcher", 25 + (int)(Math.random() * 6), "English");
+      return new Butcher("Butcher", 25 + (int)(Math.random() * 6));
     }
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
@@ -250,16 +250,20 @@ public class Game{
 
       //display event based on last turn's input
       if(partyTurn){
+        Adventurer you = party.get(whichPlayer);
+        Adventurer opp = enemies.get(whichOpponent);
 
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
+          System.out.println(you.attack(opp));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
+          System.out.println(you.specialAttack(opp));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
@@ -267,6 +271,9 @@ public class Game{
           //assume the value that follows su is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
+          int team = Integer.parseInt(input.split(" ")[1]);
+          Adventurer teammate = party.get(team);
+          System.out.println(you.support(teammate));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
 
@@ -294,12 +301,13 @@ public class Game{
         //done with one party member
       }else{
         //not the party turn!
-
-
         //enemy attacks a randomly chosen person with a randomly chosen attack.z`
         //Enemy action choices go here!
         /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
         //YOUR CODE HERE
+        Adventurer opp = enemies.get(whichOpponent);
+        Adventurer target = party.get((int)(Math.random() * party.size()));
+        System.out.println(opp.attack(target));
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
 
