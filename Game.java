@@ -115,10 +115,6 @@ public class Game{
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-      if (party.isEmpty()){
-        drawText("No Adventurers in party", startRow, 1);
-        return;
-      }
       int startCol = 10;
       int startColEnemies = startCol + 40;
       for (int i = 0; i < party.size(); i++) {
@@ -144,17 +140,16 @@ public class Game{
     double percent = (double) hp / maxHP * 100;
     // under 25% : red
     if(percent < 25){
-      output = Text.colorize(output, Text.RED);
+      return Text.colorize(output, Text.RED);
     }
     // under 75% : yellow
     else if(percent < 75){
-      output = Text.colorize(output, Text.YELLOW);
+      return Text.colorize(output, Text.YELLOW);
     }
     // otherwise : white
     else{
-      output = Text.colorize(output, Text.WHITE);
+      return Text.colorize(output, Text.WHITE);
     }
-    return output;
   }
 
 
@@ -168,17 +163,13 @@ public class Game{
     drawParty(party, 3);
     //draw enemy party
     drawParty(enemies,23);
-    Text.go(29,3);
   }
 
   public static String userInput(Scanner in){
     //Move cursor to prompt location
     Text.go(29,3);
     //show cursor
-    Text.showCursor();
-    System.out.print("> ");
     String input = in.nextLine();
-    Text.go(29,3);
 
     //clear the text that was written
     return input;
@@ -200,7 +191,9 @@ public class Game{
     //Make an ArrayList of Adventurers and add 1-3 enemies to it.
     //If only 1 enemy is added it should be the boss class.
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
+
     ArrayList<Adventurer> enemies = new ArrayList<>();
+
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
     int randnumberEnemies = 1 + (int)(Math.random() * 2);
@@ -235,36 +228,32 @@ public class Game{
     drawScreen(party,enemies);//initial state.
 
     //Main loop
-
     //display this prompt at the start of the game.
+    String preprompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+    drawText(preprompt,28,3);
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
+      //Read user input
+      input = userInput(in);
 
       //example debug statment
       TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
+      //display event based on last turn's input
       if(partyTurn){
-        //display event based on last turn's input
-        String preprompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-        drawText(preprompt,28,3);
-        Text.go(29,3);
-
-        //Read user input
-        input = userInput(in);
-
         Adventurer you = party.get(whichPlayer);
         Adventurer opp = enemies.get(whichOpponent);
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
-          System.out.println(you.attack(opp));
+          drawText(you.attack(opp), 15,3);
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
-          System.out.println(you.specialAttack(opp));
+          drawText(you.specialAttack(opp), 15,3);
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
@@ -273,8 +262,14 @@ public class Game{
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
           int team = Integer.parseInt(input.split(" ")[1]);
-          Adventurer teammate = party.get(team);
-          System.out.println(you.support(teammate));
+          if(team == whichPlayer){
+            drawText(you.support(), 15, 3);
+          }
+          else{
+            if(team < party.size()){
+              drawText(you.support(party.get(team)), 15, 3);
+            }
+          }
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
 
@@ -288,7 +283,6 @@ public class Game{
           //Decide where to draw the following prompt:
           String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
           drawText(prompt, 28,3);
-          Text.go(29,3);
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
@@ -308,15 +302,11 @@ public class Game{
         //YOUR CODE HERE
         Adventurer opp = enemies.get(whichOpponent);
         Adventurer target = party.get((int)(Math.random() * party.size()));
-        System.out.println(opp.attack(target));
+        drawText(opp.attack(target), 15, 3);
+        whichOpponent++;
+
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
-
-        //Decide where to draw the following prompt:
-        String prompt = "> press enter to see next turn";
-        drawText(prompt, 28,3);
-        Text.go(29,3);
-        whichOpponent++;
 
       }//end of one enemy.
 
@@ -330,22 +320,36 @@ public class Game{
         //display this prompt before player's turn
         String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
         drawText(prompt, 28,3);
-        Text.go(29,3);
       }
-      else{
-        String prompt = "> press enter to see next turn";
-        drawText(prompt, 28, 3);
-        Text.go(29, 3);
-      }
-
+      
       //display the updated screen after input has been processed.
+      for (int i = 0; i<party.size();i++){
+        if(party.get(i).getHP() <= 0){
+          party.remove(i);
+          i--;
+        }
+      }
+      for(int i = 0; i< enemies.size(); i++){
+        if(enemies.get(i).getHP() <= 0){
+          enemies.remove(i);
+          i--;
+        }
+      }
+      if(party.size() == 0 && enemies.size() > 0){
+        drawText("Game Over", 15, 3);
+        quit();
+      }
+      else if(party.size() > 0 && enemies.size() == 0){
+        drawText("Victory", 15, 3);
+      }
       drawScreen(party,enemies);
-
 
     }//end of main game loop
 
 
     //After quit reset things:
     quit();
-  }
 }
+}
+
+  
