@@ -237,22 +237,23 @@ public class Game{
     //Main loop
 
     //display this prompt at the start of the game.
-    String preprompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-    drawText(preprompt,28,3);
-    Text.go(29,3);
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
-      //Read user input
-      input = userInput(in);
 
       //example debug statment
       TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
-      //display event based on last turn's input
       if(partyTurn){
+        //display event based on last turn's input
+        String preprompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+        drawText(preprompt,28,3);
+        Text.go(29,3);
+
+        //Read user input
+        input = userInput(in);
+
         Adventurer you = party.get(whichPlayer);
         Adventurer opp = enemies.get(whichOpponent);
-
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
@@ -330,6 +331,11 @@ public class Game{
         String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
         drawText(prompt, 28,3);
         Text.go(29,3);
+      }
+      else{
+        String prompt = "> press enter to see next turn";
+        drawText(prompt, 28, 3);
+        Text.go(29, 3);
       }
 
       //display the updated screen after input has been processed.
