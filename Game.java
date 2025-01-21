@@ -72,10 +72,18 @@ public class Game{
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     int currentRow = row;
-    for (int i = 0; i < text.length() && row < row + height; currentRow++) {
+    int i = 0;
+    for (int r = 0; r < height; r++) {
+      Text.go(currentRow + r, col);
+      for (int j = 0; j < width; j++){
+        System.out.print(" ");
+      }
+    }
+    while(i<text.length() && currentRow < row + height){
       drawText(text.substring(i, Math.min(i+width, text.length())), currentRow, col);
       i += width;
     }
+    
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
