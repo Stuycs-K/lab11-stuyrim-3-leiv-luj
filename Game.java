@@ -125,7 +125,7 @@ public class Game{
       for (int i = 0; i < party.size(); i++) {
         Adventurer adventurer = party.get(i);
         String name = adventurer.getName();
-        String hp = "HP: " + adventurer.getHP();
+        String hp = colorByPercent(adventurer.getHP(),adventurer.getmaxHP());
         String special = "Special: " + adventurer.getSpecial();
         
         int colset = i*26;
@@ -317,25 +317,18 @@ public class Game{
         whichPlayer++;
         if(whichPlayer >= enemies.size()){
           //This is a player turn.
-          //Decide where to draw the following prompt:
-          whichPlayer = 0;
-          partyTurn = true;
-          String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-          drawText(prompt, 28,3);
+          if(!partyTurn && whichOpponent >= enemies.size()){
+            //THIS BLOCK IS TO END THE ENEMY TURN
+            //It only triggers after the last enemy goes.
+            whichPlayer = 0;
+            turn++;
+            partyTurn=true;
+            //display this prompt before player's turn
+            String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+            drawText(prompt, 28,3);
+          }
         }
       }//end of one enemy.
-
-      //modify this if statement.
-      if(!partyTurn && whichOpponent >= enemies.size()){
-        //THIS BLOCK IS TO END THE ENEMY TURN
-        //It only triggers after the last enemy goes.
-        whichPlayer = 0;
-        turn++;
-        partyTurn=true;
-        //display this prompt before player's turn
-        String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-        drawText(prompt, 28,3);
-      }
       
       //display the updated screen after input has been processed.
       for (int i = 0; i<party.size();i++){
