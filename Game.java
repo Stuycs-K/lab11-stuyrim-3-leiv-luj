@@ -13,7 +13,6 @@ public class Game{
   //Do not write over the blank areas where text will appear or parties will appear.
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    Text.clear();
     for(int i = 0; i<WIDTH+1; i++){ //horizontal line
       Text.go(0,i);
       Text.colorize(" ", BORDER_BACKGROUND);
@@ -82,8 +81,14 @@ public class Game{
     while(i<text.length() && currentRow < row + height){
       drawText(text.substring(i, Math.min(i+width, text.length())), currentRow, col);
       i += width;
+      currentRow++;
     }
-    
+    while(currentRow<row+height){
+      Text.go(currentRow++, col);
+      for(int j=0; j<width;j++){
+        System.out.print(" ");
+      }
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -200,8 +205,10 @@ public class Game{
     if(randnumberEnemies == 1){
       enemies.add(new Butcher("Boss", 10));
     }
-    for (int i = 0; i < randnumberEnemies;i++){
-      enemies.add(createRandomAdventurer());
+    else{
+      for (int i = 0; i < randnumberEnemies;i++){
+        enemies.add(createRandomAdventurer());
+      }
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
@@ -247,15 +254,16 @@ public class Game{
         if(input.equals("attack") || input.equals("a")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
-          drawText(you.attack(opp), 15,3);
+          TextBox(8,3,75,2, you.attack(opp));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
-          drawText(you.specialAttack(opp), 15,3);
+          TextBox(8,3,75,2,you.specialAttack(opp));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
+        
         else if(input.startsWith("su ") || input.startsWith("support ")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su is an integer.
@@ -263,11 +271,11 @@ public class Game{
           //YOUR CODE HERE
           int team = Integer.parseInt(input.split(" ")[1]);
           if(team == whichPlayer){
-            drawText(you.support(), 15, 3);
+            TextBox(8,3,75,2, you.support());
           }
           else{
             if(team < party.size()){
-              drawText(you.support(party.get(team)), 15, 3);
+              TextBox(8,3,75,2,you.support(party.get(team)));
             }
           }
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -302,12 +310,19 @@ public class Game{
         //YOUR CODE HERE
         Adventurer opp = enemies.get(whichOpponent);
         Adventurer target = party.get((int)(Math.random() * party.size()));
-        drawText(opp.attack(target), 15, 3);
+        TextBox(8,3,75,2,opp.attack(target));
         whichOpponent++;
 
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-
-
+        whichPlayer++;
+        if(whichPlayer >= enemies.size()){
+          //This is a player turn.
+          //Decide where to draw the following prompt:
+          whichPlayer = 0;
+          partyTurn = true;
+          String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+          drawText(prompt, 28,3);
+        }
       }//end of one enemy.
 
       //modify this if statement.
