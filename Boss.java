@@ -41,6 +41,7 @@ public class Boss extends Adventurer {
     }
   }
 
+@Override
   public String support() {
     int hp = 7;
     setHP(getHP() + hp);
@@ -49,4 +50,10 @@ public class Boss extends Adventurer {
         setSpecial(getSpecialMax());
     }
     return this + " consumed delicious food, recovering " + hp + " HP and restoring 3 insults.";
+  }
+
+  @Override
+    public String support(Adventurer other){
+      return this + "supports " + other + " with some good food!";
+    }
 }

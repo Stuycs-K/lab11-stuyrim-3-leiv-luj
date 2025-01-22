@@ -212,7 +212,7 @@ public class Game{
     //YOUR CODE HERE
     int randnumberEnemies = 1 + (int)(Math.random() * 2);
     if(randnumberEnemies == 1){
-      enemies.add(new Butcher("Boss", 10));
+      enemies.add(new Boss());
     }
     else{
       for (int i = 0; i < randnumberEnemies;i++){
@@ -274,7 +274,6 @@ public class Game{
           TextBox(8,3,75,2,you.specialAttack(opp));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
-        
         else if(input.startsWith("su ") || input.startsWith("support ")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su is an integer.
@@ -326,8 +325,7 @@ public class Game{
         whichOpponent++;
 
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-        whichPlayer++;
-        if(whichPlayer >= enemies.size()){
+        if(whichOpponent >= enemies.size()){
           //This is a player turn.
             //THIS BLOCK IS TO END THE ENEMY TURN
             //It only triggers after the last enemy goes.
@@ -360,6 +358,7 @@ public class Game{
       }
       else if(party.size() > 0 && enemies.size() == 0){
         drawText("Victory", 15, 3);
+        quit();
       }
       drawScreen(party,enemies);
 
