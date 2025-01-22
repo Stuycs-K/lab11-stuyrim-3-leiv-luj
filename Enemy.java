@@ -14,7 +14,7 @@ public class Enemy extends Adventurer {
   public int getSpecial(){
     return reviews;
   }
-
+  
   public void setSpecial(int n){
     reviews = n;
   }

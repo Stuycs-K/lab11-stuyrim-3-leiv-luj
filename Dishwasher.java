@@ -39,7 +39,7 @@ public class Dishwasher extends Adventurer{
     int damage = (int)(Math.random()*6)+2;
     other.applyDamage(damage);
     restoreSpecial(2);
-    return this + " threw dirty dishes at "+ other + " and dealt "+ damage + " points of damage. " + this + "replenishes 2 soap.";
+    return this + " threw dirty dishes at "+ other + " and dealt "+ damage + " points of damage. " + this + " replenishes 2 soap.";
   }
 
   /*Deal 3-12 damage to opponent, only if soap is high enough.

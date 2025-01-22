@@ -83,9 +83,9 @@ public class Game{
       i += width;
       currentRow++;
     }
-    while(currentRow<row+height){
+    while(currentRow < row+height){
       Text.go(currentRow++, col);
-      for(int j=0; j<width;j++){
+      for(int j=0; j < width; j++){
         System.out.print(" ");
       }
     }
@@ -171,6 +171,7 @@ public class Game{
   }
 
   public static String userInput(Scanner in){
+    clearLine(29,3,75);
     //Move cursor to prompt location
     Text.go(29,3);
     //show cursor
@@ -184,6 +185,14 @@ public class Game{
     Text.reset();
     Text.showCursor();
     Text.go(32,1);
+  }
+
+  public static void clearLine(int row, int col, int width) {
+    Text.go(row, col);
+    for (int i = 0; i < width; i++) {
+        System.out.print(" ");
+    }
+    Text.go(row,col);
   }
 
   public static void run(){
@@ -244,8 +253,8 @@ public class Game{
       input = userInput(in);
 
       //example debug statment
-      TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
-
+      clearLine(24, 2, 78);
+      //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
       //display event based on last turn's input
       if(partyTurn){
         Adventurer you = party.get(whichPlayer);
@@ -254,12 +263,14 @@ public class Game{
         if(input.equals("attack") || input.equals("a")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
+          clearLine(28,3,75);
           TextBox(8,3,75,2, you.attack(opp));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
+          clearLine(28,3,75);
           TextBox(8,3,75,2,you.specialAttack(opp));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
@@ -271,15 +282,15 @@ public class Game{
           //YOUR CODE HERE
           int team = Integer.parseInt(input.split(" ")[1]);
           if(team == whichPlayer){
+            clearLine(28,3,75);
             TextBox(8,3,75,2, you.support());
           }
-          else{
-            if(team < party.size()){
-              TextBox(8,3,75,2,you.support(party.get(team)));
-            }
+          else if(team < party.size()){
+            clearLine(28,3,75);
+            TextBox(8,3,75,2,you.support(party.get(team)));
           }
-          /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
+          /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
         //You should decide when you want to re-ask for user input
         //If no errors:
@@ -289,15 +300,16 @@ public class Game{
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
+          clearLine(28,3,75);
           String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
           drawText(prompt, 28,3);
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
+          clearLine(28,3,75);
           String prompt = "> press enter to see monster's turn";
           drawText(prompt, 28,3);
-          Text.go(29,3);
           partyTurn = false;
           whichOpponent = 0;
         }
@@ -317,7 +329,6 @@ public class Game{
         whichPlayer++;
         if(whichPlayer >= enemies.size()){
           //This is a player turn.
-          if(!partyTurn && whichOpponent >= enemies.size()){
             //THIS BLOCK IS TO END THE ENEMY TURN
             //It only triggers after the last enemy goes.
             whichPlayer = 0;
@@ -325,8 +336,8 @@ public class Game{
             partyTurn=true;
             //display this prompt before player's turn
             String prompt = "> Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+            clearLine(28,3,75);
             drawText(prompt, 28,3);
-          }
         }
       }//end of one enemy.
       
